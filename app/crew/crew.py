@@ -18,6 +18,11 @@ from typing import Any
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
+from .tools import YoutubeCollectorTool, TranscriptsSearchTool
+
+
+youtube_collector_tool = YoutubeCollectorTool()
+transcript_tool = TranscriptsSearchTool()
 
 @CrewBase
 class LeaningCrew:
@@ -28,20 +33,53 @@ class LeaningCrew:
 
     llm = "vertex_ai/gemini-2.0-flash-001"
 
+    # @agent
+    # def writer_agent(self) -> Agent:
+    #     return Agent(
+    #         config=self.agents_config.get("writer_agent"),
+    #         allow_delegation=True,
+    #         verbose=True,
+    #         llm=self.llm,
+    #     )
+
+    # @task
+    # def write(self) -> Task:
+    #     return Task(
+    #         config=self.tasks_config.get("write"),
+    #         agent=self.writer_agent(),
+    #     )
+
     @agent
-    def writer_agent(self) -> Agent:
+    def collector_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config.get("writer_agent"),
+            config=self.agents_config.get("collector_agent"),
+            allow_delegation=False,
+            verbose=True,
+            llm=self.llm,
+        )
+
+    @agent
+    def teacher_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config.get("teacher_agent"),
             allow_delegation=False,
             verbose=True,
             llm=self.llm,
         )
 
     @task
-    def write(self) -> Task:
+    def collect_youtube_videos(self) -> Task:
         return Task(
-            config=self.tasks_config.get("write"),
-            agent=self.writer_agent(),
+            config=self.tasks_config.get("collect_youtube_videos"),
+            agent=self.collector_agent(),
+            tools=[youtube_collector_tool]
+        )
+    @task
+    def make_courses(self) -> Task:
+        return Task(
+            config=self.tasks_config.get("make_courses"),
+            agent=self.teacher_agent(),
+            tools=[transcript_tool]
         )
 
     @crew

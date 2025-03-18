@@ -46,6 +46,7 @@ lint = [
     "types-requests~=2.32.0.20240914",
 ]
 
+
 [tool.ruff]
 line-length = 88
 target-version = "py310"

@@ -18,3 +18,16 @@ write:
   expected_output: >
     A well structured article
 
+collect_youtube_videos:
+  description: >
+    Search for videos about {topic} in youtube.
+    
+  expected_output: >
+    The 5 videos the more relevant as {videos_list}
+
+make_courses:
+  description: >
+    From a list of video, from the links of the videos you retrieve the transcripts of the videos and you make a structured article 
+    
+  expected_output: >
+    A structured article

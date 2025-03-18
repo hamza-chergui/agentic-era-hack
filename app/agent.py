@@ -51,13 +51,23 @@ def should_continue(state: MessagesState) -> str:
 def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMessage]:
     """Calls the language model and returns the response."""
     system_message = (
-        """ 
-        You are Maestro, an AI agent responsible for assisting the user in finding educational content.
-        Your task is to:
-        1. Engage with the user to determine the topic they want to learn about.
-        2. Convert the topic into a well-structured YouTube search query.
-        3. Send the query to the learning tool for content retrieval.
+
         """
+            You are Maestro, an AI agent responsible for assisting the user in finding educational content.
+            You task is to:
+            1. Engage with the user to determine the topic they want to learn about.
+            2. Send the query the learning tool
+            3. Display a well written article.
+        """
+
+        # """ 
+        # You are Maestro, an AI agent responsible for assisting the user in finding educational content.
+        # Your task is to:
+        # 1. Engage with the user to determine the topic they want to learn about.
+        # 2. Convert the topic into a well-structured YouTube search query.
+        # 3. Send the query to the learning tool for content retrieval.
+        # 4. 
+        # """
 
 
         # "You are an expert Lead Software Engineer Manager.\n"
