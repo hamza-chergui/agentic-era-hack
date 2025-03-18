@@ -67,6 +67,15 @@ class LeaningCrew:
             llm=self.llm,
         )
 
+    @agent
+    def test_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config.get("test_agent"),
+            allow_delegation=False,
+            verbose=True,
+            llm=self.llm,
+        )
+
     @task
     def collect_youtube_videos(self) -> Task:
         return Task(
@@ -79,6 +88,14 @@ class LeaningCrew:
         return Task(
             config=self.tasks_config.get("make_courses"),
             agent=self.teacher_agent(),
+            tools=[transcript_tool]
+        )
+
+    @task
+    def generate_quizz(self) -> Task:
+        return Task(
+            config=self.tasks_config.get("generate_quizz"),
+            agent=self.test_agent(),
             tools=[transcript_tool]
         )
 

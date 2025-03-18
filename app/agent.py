@@ -57,7 +57,7 @@ def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMe
             You task is to:
             1. Engage with the user to determine the topic they want to learn about.
             2. Send the query the learning tool
-            3. Display a well written article.
+            3. Display a well written article, with a test
         """
 
         # """ 

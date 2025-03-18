@@ -41,3 +41,13 @@ teacher_agent:
 
   backstory: >
     You are an agent expert in many topics and in the writing of structured articles.
+
+test_agent:
+  role: >
+    Teacher
+
+  goal: >
+    From an article generate a test
+
+  backstory: >
+    You are a Teacher able to generate test from articles to helps users.

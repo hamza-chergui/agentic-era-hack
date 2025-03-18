@@ -31,3 +31,13 @@ make_courses:
     
   expected_output: >
     A structured article
+
+generate_quizz:
+  description: >
+    From an article you'll create a multiple-choice test with 5 questions
+    
+  expected_output: >
+    A json with 5 question and the following fields:
+    - question
+    - possibles answers
+    - the right answer
