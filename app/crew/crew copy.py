@@ -20,8 +20,8 @@ from crewai.project import CrewBase, agent, crew, task
 
 
 @CrewBase
-class LeaningCrew:
-    """Leaning crew"""
+class DevCrew:
+    """Developer crew"""
 
     agents_config: dict[str, Any]
     tasks_config: dict[str, Any]
@@ -29,19 +29,35 @@ class LeaningCrew:
     llm = "vertex_ai/gemini-2.0-flash-001"
 
     @agent
-    def writer_agent(self) -> Agent:
+    def senior_engineer_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config.get("writer_agent"),
+            config=self.agents_config.get("senior_engineer_agent"),
             allow_delegation=False,
             verbose=True,
             llm=self.llm,
         )
 
+    @agent
+    def chief_qa_engineer_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config.get("chief_qa_engineer_agent"),
+            allow_delegation=True,
+            verbose=True,
+            llm=self.llm,
+        )
+
     @task
-    def write(self) -> Task:
+    def code_task(self) -> Task:
         return Task(
-            config=self.tasks_config.get("write"),
-            agent=self.writer_agent(),
+            config=self.tasks_config.get("code_task"),
+            agent=self.senior_engineer_agent(),
+        )
+
+    @task
+    def evaluate_task(self) -> Task:
+        return Task(
+            config=self.tasks_config.get("evaluate_task"),
+            agent=self.chief_qa_engineer_agent(),
         )
 
     @crew

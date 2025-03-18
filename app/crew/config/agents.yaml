@@ -12,6 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+writer_agent:
+  role: >
+    Writer
+
+  goal: >
+    Write a description about a topic
+
+  backstory: >
+    You are an instructor, and you have a lot of knowledge about many topics.
+
 senior_engineer_agent:
   role: >
     Senior Software Engineer
