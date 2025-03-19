@@ -36,14 +36,6 @@ class LearningCrew:
     tasks_config: dict[str, Any]
 
     llm = "vertex_ai/gemini-2.0-flash-001"
-    @agent
-    def collector_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config.get("collector_agent"),
-            allow_delegation=False,
-            verbose=True,
-            llm=self.llm,
-        )
 
     @agent
     def teacher_agent(self) -> Agent:
@@ -61,14 +53,6 @@ class LearningCrew:
             allow_delegation=False,
             verbose=True,
             llm=self.llm,
-        )
-
-    @task
-    def collect_youtube_videos(self) -> Task:
-        return Task(
-            config=self.tasks_config.get("collect_youtube_videos"),
-            agent=self.collector_agent(),
-            tools=[youtube_collector_tool]
         )
 
     @task

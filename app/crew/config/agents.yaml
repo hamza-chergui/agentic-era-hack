@@ -44,7 +44,7 @@ teacher_agent:
 
 test_agent:
   role: >
-    Teacher
+    Evaluator
 
   goal: >
     From an article generate a test

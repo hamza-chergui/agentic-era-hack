@@ -11,12 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-write:
-  description: >
-    Write an article about {topic} to explain it.
-    
-  expected_output: >
-    A well structured article
 
 collect_youtube_videos:
   description: >
@@ -27,8 +21,8 @@ collect_youtube_videos:
 
 make_courses:
   description: >
-    From a list of video, from the links of the videos, you retrieve the transcripts of the videos and you make a structured article. 
-    You store the article in GCS in 'courses' folder choose the right name for the course.
+    From {videos_links}, you retrieve the transcripts of the videos and you make a structured article. 
+    You store the article in GCS in 'courses' folder the name of the file is {topic}.
     
   expected_output: >
     A structured article
@@ -36,7 +30,7 @@ make_courses:
 generate_quizz:
   description: >
     From an article you'll create a multiple-choice test with 5 questions
-    You store the output json in GCS in 'tests' folder choose the right name for the test.
+    You store the output json in GCS in 'tests' folder the name of the file is the topic.
 
   expected_output: >
     A json with 5 question and the following fields:

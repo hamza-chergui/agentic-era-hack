@@ -17,7 +17,7 @@ class YoutubeCollectorTool(BaseTool):
     description: str = ("Find the youtube video related to a topic.")
     def _run(self, topic: str) -> list:
         videos = self.search_youtube(topic)
-        videos_list = [video for video in videos if video['source'] == 'YouTube'][:5]  # Filtrer avant la boucle
+        videos_list = [video for video in videos if video['source'] == 'YouTube']
         return videos_list
 
     def search_youtube(self,query):
@@ -41,18 +41,21 @@ class TranscriptsSearchTool(BaseTool):
     def _run(self, videos_list: list) -> str:
         transcripts = ""
         for video in videos_list:
-            video_id = video['link'].split('v=')[-1]
-            
-            ytt_api = YouTubeTranscriptApi()
-            fetched_transcript = ytt_api.fetch(video_id, languages=['en'])
-            raw_transcript = "\n".join([snippet.text for snippet in fetched_transcript.snippets])
-            transcripts = transcripts+ raw_transcript + "\n"
+            try :
+                video_id = video['link'].split('v=')[-1]
+                
+                ytt_api = YouTubeTranscriptApi()
+                fetched_transcript = ytt_api.fetch(video_id, languages=['en'])
+                raw_transcript = "\n".join([snippet.text for snippet in fetched_transcript.snippets])
+                transcripts = transcripts+ raw_transcript + "\n"
+            except :
+                continue
         return transcripts
 
 
 class StoreGCSTool(BaseTool):
     name: str = "Store GCS Tool"
-    description: str = "Store a received content (test or course) in a GCS bucket."
+    description: str = "Store a received content (test or course) in folder_name/document_title in GCS bucket"
 
     def _run(self, folder_name:str, document_title:str, content_to_store: t.Any) -> str: 
         self.upload_to_gcs(content_to_store, f"{folder_name}/{document_title}")
