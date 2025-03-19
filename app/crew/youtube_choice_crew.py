@@ -18,15 +18,19 @@ from typing import Any
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from .tools import YoutubeCollectorTool, TranscriptsSearchTool
+from .tools import YoutubeCollectorTool, TranscriptsSearchTool, StoreGCSTool
 
 
 youtube_collector_tool = YoutubeCollectorTool()
 transcript_tool = TranscriptsSearchTool()
 
+
+store_course_gcs_tool = StoreGCSTool()
+store_test_gcs_tool = StoreGCSTool()
+
 @CrewBase
-class LeaningCrew:
-    """Leaning crew"""
+class YoutubeChoiceCrew:
+    """Youtube Choice Crew"""
 
     agents_config: dict[str, Any]
     tasks_config: dict[str, Any]
@@ -41,24 +45,6 @@ class LeaningCrew:
             llm=self.llm,
         )
 
-    @agent
-    def teacher_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config.get("teacher_agent"),
-            allow_delegation=False,
-            verbose=True,
-            llm=self.llm,
-        )
-
-    @agent
-    def test_agent(self) -> Agent:
-        return Agent(
-            config=self.agents_config.get("test_agent"),
-            allow_delegation=False,
-            verbose=True,
-            llm=self.llm,
-        )
-
     @task
     def collect_youtube_videos(self) -> Task:
         return Task(
@@ -66,22 +52,7 @@ class LeaningCrew:
             agent=self.collector_agent(),
             tools=[youtube_collector_tool]
         )
-    @task
-    def make_courses(self) -> Task:
-        return Task(
-            config=self.tasks_config.get("make_courses"),
-            agent=self.teacher_agent(),
-            tools=[transcript_tool]
-        )
-
-    @task
-    def generate_quizz(self) -> Task:
-        return Task(
-            config=self.tasks_config.get("generate_quizz"),
-            agent=self.test_agent(),
-            tools=[transcript_tool]
-        )
-
+        
     @crew
     def crew(self) -> Crew:
         """Creates the Dev Crew"""

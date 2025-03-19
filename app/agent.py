@@ -20,7 +20,7 @@ from langchain_google_vertexai import ChatVertexAI
 from langgraph.graph import END, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
-from .crew.crew import LeaningCrew
+from .crew.learning_crew import LearningCrew
 
 LOCATION = "us-central1"
 LLM = "gemini-2.0-flash-001"
@@ -30,7 +30,7 @@ LLM = "gemini-2.0-flash-001"
 def learning_tool(topic: str) -> str:
     """Use this tool to write an article about a topic."""
     inputs = {"topic": topic}
-    return LeaningCrew().crew().kickoff(inputs=inputs)
+    return LearningCrew().crew().kickoff(inputs=inputs)
 
 
 tools = [learning_tool]
