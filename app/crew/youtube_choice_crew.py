@@ -18,8 +18,7 @@ from typing import Any
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from .tools import YoutubeCollectorTool, TranscriptsSearchTool, StoreGCSTool
-
+from .tools import StoreGCSTool, TranscriptsSearchTool, YoutubeCollectorTool
 
 youtube_collector_tool = YoutubeCollectorTool()
 transcript_tool = TranscriptsSearchTool()
@@ -27,6 +26,7 @@ transcript_tool = TranscriptsSearchTool()
 
 store_course_gcs_tool = StoreGCSTool()
 store_test_gcs_tool = StoreGCSTool()
+
 
 @CrewBase
 class YoutubeChoiceCrew:
@@ -36,6 +36,7 @@ class YoutubeChoiceCrew:
     tasks_config: dict[str, Any]
 
     llm = "vertex_ai/gemini-2.0-flash-001"
+
     @agent
     def collector_agent(self) -> Agent:
         return Agent(
@@ -50,9 +51,9 @@ class YoutubeChoiceCrew:
         return Task(
             config=self.tasks_config.get("collect_youtube_videos"),
             agent=self.collector_agent(),
-            tools=[youtube_collector_tool]
+            tools=[youtube_collector_tool],
         )
-        
+
     @crew
     def crew(self) -> Crew:
         """Creates the Dev Crew"""

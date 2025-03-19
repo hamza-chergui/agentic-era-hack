@@ -18,8 +18,7 @@ from typing import Any
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from .tools import YoutubeCollectorTool, TranscriptsSearchTool, StoreGCSTool
-
+from .tools import StoreGCSTool, TranscriptsSearchTool, YoutubeCollectorTool
 
 youtube_collector_tool = YoutubeCollectorTool()
 transcript_tool = TranscriptsSearchTool()
@@ -27,6 +26,7 @@ transcript_tool = TranscriptsSearchTool()
 
 store_course_gcs_tool = StoreGCSTool()
 store_test_gcs_tool = StoreGCSTool()
+
 
 @CrewBase
 class LearningCrew:
@@ -60,16 +60,15 @@ class LearningCrew:
         return Task(
             config=self.tasks_config.get("make_courses"),
             agent=self.teacher_agent(),
-            tools=[transcript_tool, store_course_gcs_tool]
+            tools=[transcript_tool, store_course_gcs_tool],
         )
-
 
     @task
     def generate_quizz(self) -> Task:
         return Task(
             config=self.tasks_config.get("generate_quizz"),
             agent=self.test_agent(),
-            tools=[store_test_gcs_tool]
+            tools=[store_test_gcs_tool],
         )
 
     @crew

@@ -23,7 +23,6 @@ from langgraph.prebuilt import ToolNode
 from .crew.learning_crew import LearningCrew
 from .crew.youtube_choice_crew import YoutubeChoiceCrew
 
-
 LOCATION = "us-central1"
 LLM = "gemini-2.0-flash-001"
 
@@ -34,11 +33,13 @@ def learning_tool(topic: str, videos_links: list[str]) -> str:
     inputs = {"topic": topic, "videos_links": videos_links}
     return LearningCrew().crew().kickoff(inputs=inputs)
 
+
 @tool
 def youtube_choice_tool(topic: str) -> str:
     """Use this tool search and choose the best youtube videos related to a topic"""
     inputs = {"topic": topic}
     return YoutubeChoiceCrew().crew().kickoff(inputs=inputs)
+
 
 tools = [youtube_choice_tool, learning_tool]
 
@@ -57,17 +58,14 @@ def should_continue(state: MessagesState) -> str:
 
 def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMessage]:
     """Calls the language model and returns the response."""
-    system_message = (
-
-        """
+    system_message = """
             You are Maestro, an AI agent responsible for assisting the user in finding educational content.
             Your tasks are to:
-            1. Engage with the user to determine the topic they want to learn about. 
+            1. Engage with the user to determine the topic they want to learn about.
             2. Help them to choose and validate best youtube videos related to the topic and display the links with the titles
             Once the user validate the choice transmit the topic and the list of videos links to the learning tool.
             #3. Display a well written article, with a test
         """
-    )
 
     messages_with_system = [{"type": "system", "content": system_message}] + state[
         "messages"
