@@ -64,7 +64,7 @@ def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMe
             1. Engage with the user to determine the topic they want to learn about.
             2. Help them to choose and validate best youtube videos related to the topic and display the links with the titles
             Once the user validate the choice transmit the topic and the list of videos links to the learning tool.
-            #3. Display a well written article, with a test
+            3. You say that you'll find your course in the courses section
         """
 
     messages_with_system = [{"type": "system", "content": system_message}] + state[

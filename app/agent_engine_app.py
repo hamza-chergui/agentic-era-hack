@@ -182,6 +182,8 @@ def deploy_agent_engine_app(
         filter=f"display_name={agent_name}"
     )
 
+    print("**********")
+    print(agent_config)
     if existing_agents:
         # Update the existing agent with new configuration
         logging.info(f"Updating existing agent: {agent_name}")

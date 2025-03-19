@@ -21,19 +21,19 @@ collect_youtube_videos:
 
 make_courses:
   description: >
-    1. From {videos_links}, you retrieve the transcripts of the videos and you make a structured article. 
-    2. You store the article in GCS in {topic} folder the name of the file is 'course'.
+    1. From {videos_links}, you retrieve the transcripts of the videos, you concatenante all the transcripts and you make one structured  course with all the details from the transcripts. 
+    2. You store the course in GCS in a folder named {topic} the name of the file is 'course'.
     
   expected_output: >
-    A structured article
+    A structured course
 
 generate_quizz:
   description: >
-    1. From an article you'll create a multiple-choice test with 5 questions
-    2. You store the article in GCS in {topic} folder the name of the file is 'test'.
+    1. From an course you'll create a multiple-choice test with 5 questions
+    2. You store the test in GCS in a folded named {topic} the name of the file is 'test'.
 
   expected_output: >
     A json with 5 question and the following fields:
-    - question
-    - possibles answers
-    - the right answer
+    - question: question 
+    - answers: possibles answers
+    - correct_answer: the right answer

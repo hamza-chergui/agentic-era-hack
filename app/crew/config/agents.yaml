@@ -12,15 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-writer_agent:
-  role: >
-    Writer
 
-  goal: >
-    Write a description about a topic
-
-  backstory: >
-    You are an instructor, and you have a lot of knowledge about many topics.
 
 collector_agent:
   role: >
@@ -37,10 +29,10 @@ teacher_agent:
     Teacher
 
   goal: >
-    Understand a messy transcripts from videos, Resume it and write a structured article
+    You're responsible of building a well structured course.
 
   backstory: >
-    You are an agent expert in many topics and in the writing of structured articles.
+    You are an agent expert in many topics and in the writing of structured courses.
 
 test_agent:
   role: >
