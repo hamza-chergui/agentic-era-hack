@@ -32,23 +32,6 @@ class LeaningCrew:
     tasks_config: dict[str, Any]
 
     llm = "vertex_ai/gemini-2.0-flash-001"
-
-    # @agent
-    # def writer_agent(self) -> Agent:
-    #     return Agent(
-    #         config=self.agents_config.get("writer_agent"),
-    #         allow_delegation=True,
-    #         verbose=True,
-    #         llm=self.llm,
-    #     )
-
-    # @task
-    # def write(self) -> Task:
-    #     return Task(
-    #         config=self.tasks_config.get("write"),
-    #         agent=self.writer_agent(),
-    #     )
-
     @agent
     def collector_agent(self) -> Agent:
         return Agent(

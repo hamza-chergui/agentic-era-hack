@@ -4,23 +4,23 @@ from crewai.tools import BaseTool
 
 from youtube_transcript_api import YouTubeTranscriptApi
 
-from .variable import API_KEY
+import os
 import requests
+
+SERPER_API_KEY = os.getenv("SERPER_API_KEY")
+
 
 class YoutubeCollectorTool(BaseTool):
     name: str ="Youtube Links Collector Tool"
     description: str = ("Find the youtube video related to a topic.")
     def _run(self, topic: str) -> list:
-        print(topic)
         videos = self.search_youtube(topic)
         videos_list = [video for video in videos if video['source'] == 'YouTube'][:5]  # Filtrer avant la boucle
         return videos_list
-        # videos_list = [video['title'] for video in videos if video['source'] == 'YouTube'][:5]  # Filtrer avant la boucle
-        # return "These are the five videos: \n".join(videos_list)
 
     def search_youtube(self,query):
         url = "https://google.serper.dev/videos"
-        headers = {"X-API-KEY": API_KEY, "Content-Type": "application/json"}
+        headers = {"X-API-KEY": SERPER_API_KEY, "Content-Type": "application/json"}
         payload = {"q": query}
 
         response = requests.post(url, json=payload, headers=headers)

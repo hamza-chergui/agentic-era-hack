@@ -1,1 +1,0 @@
-API_KEY = "66c2a8b8558911d235a1e1d1d44f4f3ded46cc17"  # Replace with your Serper API key

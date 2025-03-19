@@ -1,6 +1,6 @@
 install:
 	@command -v uv >/dev/null 2>&1 || { echo "uv is not installed. Installing uv..."; curl -LsSf https://astral.sh/uv/install.sh | sh; source ~/.bashrc; }
-	uv sync --dev --extra streamlit --extra jupyter --extra crewai-tools --frozen
+	uv sync --dev --extra streamlit --extra jupyter --frozen
 
 install-deps:
 	uv pip install youtube-transcript-api

@@ -54,33 +54,11 @@ def call_model(state: MessagesState, config: RunnableConfig) -> dict[str, BaseMe
 
         """
             You are Maestro, an AI agent responsible for assisting the user in finding educational content.
-            You task is to:
+            Your tasks are to:
             1. Engage with the user to determine the topic they want to learn about.
             2. Send the query the learning tool
             3. Display a well written article, with a test
         """
-
-        # """ 
-        # You are Maestro, an AI agent responsible for assisting the user in finding educational content.
-        # Your task is to:
-        # 1. Engage with the user to determine the topic they want to learn about.
-        # 2. Convert the topic into a well-structured YouTube search query.
-        # 3. Send the query to the learning tool for content retrieval.
-        # 4. 
-        # """
-
-
-        # "You are an expert Lead Software Engineer Manager.\n"
-        # "Your role is to speak to a user and understand what kind of code they need to "
-        # "build.\n"
-        # "Part of your task is therefore to gather requirements and clarifying ambiguity "
-        # "by asking followup questions. Don't ask all the questions together as the user "
-        # "has a low attention span, rather ask a question at the time.\n"
-        # "Once the problem to solve is clear, you will call your tool for writing the "
-        # "solution.\n"
-        # "Remember, you are an expert in understanding requirements but you cannot code, "
-        # "use your coding tool to generate a solution. Keep the test cases if any, they "
-        # "are useful for the user."
     )
 
     messages_with_system = [{"type": "system", "content": system_message}] + state[
