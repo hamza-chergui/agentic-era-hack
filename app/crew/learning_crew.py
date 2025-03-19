@@ -30,7 +30,7 @@ store_test_gcs_tool = StoreGCSTool()
 
 @CrewBase
 class LearningCrew:
-    """Learning crew"""
+    """Learning crew : teacher_agent that write and store the course and a test_agent that generate a quizz and store it"""
 
     agents_config: dict[str, Any]
     tasks_config: dict[str, Any]
@@ -73,7 +73,7 @@ class LearningCrew:
 
     @crew
     def crew(self) -> Crew:
-        """Creates the Dev Crew"""
+        """Creates the Learning Crew"""
         return Crew(
             agents=self.agents,
             tasks=self.tasks,

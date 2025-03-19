@@ -56,7 +56,7 @@ class YoutubeChoiceCrew:
 
     @crew
     def crew(self) -> Crew:
-        """Creates the Dev Crew"""
+        """Creates the Youtube Choice Crew"""
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
